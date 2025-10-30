@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - FinanceFlow</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="app-container">
+        
+        
+        <nav class="navbar">
+            <div class="navbar-left">
+                <div class="logo">
+                    <div class="logo-icon">💰</div>
+                    <span>SpendWise</span>
+                </div>
+                <div class="main-nav-buttons">
+                    <a href="#overview" class="nav-btn active" data-target="overview-content">
+                        <i class="fas fa-chart-pie"></i> Overview
+                    </a>
+                    <a href="#transactions" class="nav-btn" data-target="transactions-content">
+                        <i class="fas fa-exchange-alt"></i> Transactions
+                    </a>
+                    <a href="#budgets" class="nav-btn" data-target="budgets-content">
+                        <i class="fas fa-wallet"></i> Budgets
+                    </a>
+                    <a href="#reports" class="nav-btn" data-target="reports-content">
+                        <i class="fas fa-chart-line"></i> Reports
+                    </a>
+                </div>
+            </div>
+            <div class="profile-section">
+                <a href="#" class="profile-icon-link">
+                    <img src="https://api.dicebear.com/8.x/initials/svg?seed=AK" alt="Profile" class="profile-icon">
+                </a>
+            </div>
+        </nav>
+
+        
+        <main class="main-content">
+            
+            
+            <div id="dynamic-content-area" class="dynamic-content-area">
+                
+            </div>
+
+        </main>
+    </div>
+
+<div id="profile-modal-overlay" class="modal-overlay hidden"></div>
+<div id="profile-modal" class="profile-modal hidden">
+    <div class="profile-modal-header">
+        <h3>Profile</h3>
+        <button id="profile-close-btn" class="modal-close-btn">&times;</button>
+    </div>
+    
+    <div class="profile-modal-content">
+        
+        <div class="profile-user-section">
+            <img src="https://api.dicebear.com/8.x/initials/svg?seed=AK" alt="Profile" class="profile-avatar">
+            <h4 class="profile-name">Abhishek Kumar</h4>
+            <p class="profile-email">abhishek.kumar@example.com</p>
+        </div>
+
+        
+        <div class="profile-section">
+            <h5 class="profile-section-title">Appearance</h5>
+            <div class="theme-toggle-container">
+                <span class="theme-label">
+                    <i class="fas fa-moon"></i> Dark
+                </span>
+                <label class="theme-toggle">
+                    <input type="checkbox" id="theme-toggle-checkbox">
+                    <span class="theme-slider"></span>
+                </label>
+                <span class="theme-label">
+                    <i class="fas fa-sun"></i> Light
+                </span>
+            </div>
+        </div>
+
+        
+        <div class="profile-section">
+            <h5 class="profile-section-title">Quick Stats</h5>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Transactions</span>
+                    <span class="stat-value">10</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Active Budgets</span>
+                    <span class="stat-value">6</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Member Since-</span>
+                    <span class="stat-value"> Oct-2025</span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="profile-section">
+            <h5 class="profile-section-title">Settings</h5>
+            <div class="profile-menu">
+                <button class="profile-menu-item">
+                    <i class="fas fa-user-edit"></i>
+                    <span>Edit Profile</span>
+                </button>
+                <button class="profile-menu-item">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                </button>
+                <button class="profile-menu-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help & Support</span>
+                </button>
+            </div>
+        </div>
+
+        
+        <div class="profile-section">
+            <button class="btn btn-primary btn-full" id="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+            <a href="#" class="delete-account-link">Delete Account</a>
+        </div>
+    </div>
+</div>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
