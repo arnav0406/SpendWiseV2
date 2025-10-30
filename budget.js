@@ -1,53 +1,6 @@
-export let budgetsData = [
-    { 
-        id: 1,
-        category: 'Groceries', 
-        budgeted: 300.00, 
-        spent: 75.00, 
-        icon: 'fas fa-shopping-cart',
-        period: 'monthly'
-    },
-    { 
-        id: 2,
-        category: 'Dining', 
-        budgeted: 150.00, 
-        spent: 50.00, 
-        icon: 'fas fa-utensils',
-        period: 'monthly'
-    },
-    { 
-        id: 3,
-        category: 'Entertainment', 
-        budgeted: 100.00, 
-        spent: 20.00, 
-        icon: 'fas fa-film',
-        period: 'monthly'
-    },
-    { 
-        id: 4,
-        category: 'Shopping', 
-        budgeted: 200.00, 
-        spent: 30.00, 
-        icon: 'fas fa-shopping-bag',
-        period: 'monthly'
-    },
-    { 
-        id: 5,
-        category: 'Housing', 
-        budgeted: 1000.00, 
-        spent: 970.00, 
-        icon: 'fas fa-home',
-        period: 'monthly'
-    },
-    { 
-        id: 6,
-        category: 'Health', 
-        budgeted: 100.00, 
-        spent: 50.00, 
-        icon: 'fas fa-heartbeat',
-        period: 'monthly'
-    },
-];
+
+import { getBudgets, addBudget as addBudgetToData } from './data.js';
+
 const categoryIcons = {
     'groceries': 'fas fa-shopping-cart',
     'dining': 'fas fa-utensils',
@@ -61,15 +14,14 @@ const categoryIcons = {
 
 export function addBudget(budgetData) {
     const newBudget = {
-        id: Date.now(), 
         category: budgetData.category.charAt(0).toUpperCase() + budgetData.category.slice(1),
         budgeted: parseFloat(budgetData.amount),
-        spent: 0, 
+        spent: 0,
         icon: categoryIcons[budgetData.category.toLowerCase()] || 'fas fa-wallet',
         period: budgetData.period
     };
     
-    budgetsData.push(newBudget);
+    return addBudgetToData(newBudget);
 }
 
 function calculateTotals(budgets) {
@@ -110,8 +62,8 @@ function generateBudgetItemsHTML(budgets) {
                         </div>
                     </div>
                     <div class="budget-item-amounts">
-                        <span class="budget-spent ${status}">€${budget.spent.toFixed(2)}</span>
-                        <span class="budget-total">of €${budget.budgeted.toFixed(2)}</span>
+                        <span class="budget-spent ${status}">₹${budget.spent.toFixed(2)}</span>
+                        <span class="budget-total">of ₹${budget.budgeted.toFixed(2)}</span>
                     </div>
                 </div>
                 
@@ -121,7 +73,7 @@ function generateBudgetItemsHTML(budgets) {
                     </div>
                     <div class="budget-progress-info">
                         <span class="budget-percentage">${percentage.toFixed(0)}% used</span>
-                        <span class="budget-remaining">€${remaining.toFixed(2)} left</span>
+                        <span class="budget-remaining">₹${remaining.toFixed(2)} left</span>
                     </div>
                 </div>
             </div>
@@ -129,17 +81,17 @@ function generateBudgetItemsHTML(budgets) {
     }).join('');
 }
 
-
 export function renderBudgets() {
+    const budgetsData = getBudgets();
     const { totalBudgeted, totalSpent } = calculateTotals(budgetsData);
-    const totalRemaining = totalBudgeted - totalSpent;
+    const budgetHealthStatus = getBudgetStatus(totalSpent, totalBudgeted);
     const budgetItems = generateBudgetItemsHTML(budgetsData);
 
     return `
         <div class="overview-header">
             <div>
                 <h3 class="overview-title">Monthly Budget</h3>
-                <span class="balance-display">€${totalBudgeted.toFixed(2)}</span>
+                <span class="balance-display">₹${totalBudgeted.toFixed(2)}</span>
             </div>
         </div>
 
@@ -150,17 +102,17 @@ export function renderBudgets() {
                 </div>
                 <div class="card-details">
                     <span class="card-title">Total Budgeted</span>
-                    <span class="card-amount">€${totalBudgeted.toFixed(2)}</span>
+                    <span class="card-amount">₹${totalBudgeted.toFixed(2)}</span>
                 </div>
             </div>
             
             <div class="overview-card">
-                <div class="card-icon ${getBudgetStatus(totalSpent, totalBudgeted)}">
+                <div class="card-icon ${budgetHealthStatus}">
                     <i class="fas fa-credit-card"></i>
                 </div>
                 <div class="card-details">
                     <span class="card-title">Total Spent</span>
-                    <span class="card-amount">€${totalSpent.toFixed(2)}</span>
+                    <span class="card-amount">₹${totalSpent.toFixed(2)}</span>
                 </div>
             </div>
         </div>
@@ -171,8 +123,9 @@ export function renderBudgets() {
                 <input type="text" id="budget-search-bar" placeholder="Search budgets...">
             </div>
             <select id="budget-period-filter" class="filter-select">
-                <option value="monthly">Monthly</option>
+                <option value="all">All Periods</option>
                 <option value="weekly">Weekly</option>
+                <option value="monthly" selected>Monthly</option>
                 <option value="annual">Annual</option>
             </select>
             <button id="add-budget-btn" class="btn btn-primary">

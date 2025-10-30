@@ -193,7 +193,7 @@ h1 {
 }
 
 .landing-right {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    background: linear-gradient(135deg, var(--primary-blue), #8b5cf6);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,5 +1,4 @@
-import { transactionsData } from './transaction.js';
-import { budgetsData } from './budget.js';
+import { getTransactions, getBudgets } from './data.js';
 
 
 function calculateTotalIncome(transactions) {
@@ -101,7 +100,7 @@ function generatePieChartLegend(categoryData, totalExpenses) {
                 <div class="pie-legend-color" style="background: ${color};"></div>
                 <div class="pie-legend-details">
                     <span class="pie-legend-category">${item.category}</span>
-                    <span class="pie-legend-amount">€${item.amount.toFixed(2)} (${percentage.toFixed(1)}%)</span>
+                    <span class="pie-legend-amount">₹${item.amount.toFixed(2)} (${percentage.toFixed(1)}%)</span>
                 </div>
             </div>
         `;
@@ -110,6 +109,8 @@ function generatePieChartLegend(categoryData, totalExpenses) {
 
 
 export function renderReports() {
+    const transactionsData = getTransactions();
+    const budgetsData = getBudgets();
     const totalIncome = calculateTotalIncome(transactionsData);
     const totalExpenses = calculateTotalExpenses(transactionsData);
     const netSavings = totalIncome - totalExpenses;
@@ -136,7 +137,7 @@ export function renderReports() {
                 <div class="card-details">
                     <span class="card-title">Net Savings</span>
                     <span class="card-amount ${netSavings >= 0 ? 'success' : 'danger'}">
-                        ${netSavings >= 0 ? '+' : ''}€${netSavings.toFixed(2)}
+                        ${netSavings >= 0 ? '+' : ''}₹${netSavings.toFixed(2)}
                     </span>
                 </div>
             </div>
@@ -148,7 +149,7 @@ export function renderReports() {
                 </div>
                 <div class="card-details">
                     <span class="card-title">Daily Avg Spending</span>
-                    <span class="card-amount">€${spendingRate.toFixed(2)}</span>
+                    <span class="card-amount">₹${spendingRate.toFixed(2)}</span>
                 </div>
             </div>
 
@@ -186,7 +187,7 @@ export function renderReports() {
                     </div>
                     <div class="comparison-details">
                         <span class="comparison-label">Total Income</span>
-                        <span class="comparison-amount success">€${totalIncome.toFixed(2)}</span>
+                        <span class="comparison-amount success">₹${totalIncome.toFixed(2)}</span>
                     </div>
                 </div>
 
@@ -202,7 +203,7 @@ export function renderReports() {
                     </div>
                     <div class="comparison-details">
                         <span class="comparison-label">Total Expenses</span>
-                        <span class="comparison-amount danger">€${totalExpenses.toFixed(2)}</span>
+                        <span class="comparison-amount danger">₹${totalExpenses.toFixed(2)}</span>
                     </div>
                 </div>
             </div>
@@ -219,7 +220,7 @@ export function renderReports() {
                 </div>
                 <div class="income-expense-difference">
                     <span class="${netSavings >= 0 ? 'success' : 'danger'}">
-                        Difference: ${netSavings >= 0 ? '+' : ''}€${netSavings.toFixed(2)}
+                        Difference: ${netSavings >= 0 ? '+' : ''}₹${netSavings.toFixed(2)}
                     </span>
                 </div>
             </div>
