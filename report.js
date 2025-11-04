@@ -80,7 +80,6 @@ function generatePieChartGradient(categoryData, totalExpenses) {
     return `conic-gradient(${gradientParts.join(', ')})`;
 }
 
-
 function generatePieChartLegend(categoryData, totalExpenses) {
     if (categoryData.length === 0) {
         return `<p class="no-transactions-message">No expense data available.</p>`;
